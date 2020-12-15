@@ -24,7 +24,7 @@ function Header({ Auth, PopUpState, logout }) {
                 <button className="button success" onClick={() => history.push("/order")}> Order </button>
                 <button className="button success" onClick={() => logout()}> Logout </button>
                 {/* <button className="button success"> </button> */}
-                <div className="" style={{ width: "50px", height: "50px", borderRadius: "50%", backgroundColor: "green", overflow: "hidden" }}>
+                <div className="pointer" style={{ width: "50px", height: "50px", borderRadius: "50%", backgroundColor: "green", overflow: "hidden" }}>
                     <img src={`${Auth.userData ? `http://localhost:5000/uploads/${Auth.userData.avatar}` : ""}`} alt="" onClick={() => setState(!state)} />
                 </div>
             </div>

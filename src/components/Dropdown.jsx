@@ -8,10 +8,10 @@ function Dropdown({ Auth, logout }) {
 
     const history = useHistory()
     return (
-        <div style={{ width: "200px", height: "auto", padding: "10px", position: "fixed", top: "10%", zIndex: "100", right: "10%" }}>
-            <span onClick={() => history.push(`/profile/${Auth.userData.id}`)}>Profile</span>
-            <span onClick={() => history.push("/order")}>Order</span>
-            <span onClick={() => logout()}>Logout</span>
+        <div className="flex flex-column border warning" style={{ width: "200px", height: "auto", padding: "10px", position: "fixed", top: "20%", zIndex: "100", right: "10%" }}>
+            <span className="border success pointer" onClick={() => history.push(`/profile/${Auth.userData.id}`)}>Profile</span>
+            <span className="border success pointer" onClick={() => history.push("/order")}>Order</span>
+            <span className="border success pointer" onClick={() => logout()}>Logout</span>
         </div>
     )
 
