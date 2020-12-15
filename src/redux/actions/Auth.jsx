@@ -70,3 +70,20 @@ export const editProfile = (data) => async dispatch => {
         console.log(error);
     }
 }
+export const getUser = (data) => async dispatch => {
+    try {
+        console.log(data);
+        const result = await Axios.get(`${baseUrl}/user/${data}`, configJson)
+        dispatch({
+            type: "GET_USER",
+            payload: result.data.data.user
+        })
+    } catch (error) {
+        dispatch(popUp(JSON.stringify(error)))
+    }
+}
+export const logout = () => dispatch => {
+    dispatch({
+        type: "AUTH_ERROR",
+    })
+}

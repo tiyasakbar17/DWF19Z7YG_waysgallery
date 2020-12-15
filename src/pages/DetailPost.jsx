@@ -22,7 +22,7 @@ export const DetailPost = ({ Posts, getPost }) => {
         <div style={{ margin: "121px 80px" }}>
             <div className="">
                 <div className="border" style={{ width: "50px", height: "50px", borderRadius: "50%", overflow: "hidden" }}>
-                    <img src={`http://localhost:5000/uploads/${Posts.post.createdBy.avatar}`} alt="" className="image" />
+                    <img onClick={() => history.push(`/profile/${Posts.post.createdBy.id}`)} src={`http://localhost:5000/uploads/${Posts.post.createdBy.avatar}`} alt="" className="pointer image" />
                 </div>
                 <h3>{Posts.post.title}</h3>
                 <h4>{Posts.post.createdBy.fullName}</h4>

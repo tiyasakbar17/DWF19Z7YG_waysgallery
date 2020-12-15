@@ -14,6 +14,7 @@ import EditProfile from "./pages/EditProfile";
 import AddPost from "./pages/AddPost";
 import Hired from "./pages/Hired";
 import Order from "./pages/Order";
+import Profile from "./pages/Profile";
 
 function App() {
   if (localStorage.getItem("token")) {
@@ -35,6 +36,7 @@ function App() {
           <UserRouter exact path="/addPost/" component={AddPost} />
           <UserRouter exact path="/hired/:id" component={Hired} />
           <UserRouter exact path="/order" component={Order} />
+          <UserRouter exact path="/profile/:id" component={Profile} />
           <UserRouter exact path />
         </Switch>
       </BrowserRouter>

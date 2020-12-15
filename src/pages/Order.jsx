@@ -11,7 +11,7 @@ export const Order = ({ Auth }) => {
     const [state, setState] = useState(initialState)
 
     const clickHandler = (get) => {
-        setState(get)
+        setState(prevstate => ({ status: get }))
     }
 
     return (

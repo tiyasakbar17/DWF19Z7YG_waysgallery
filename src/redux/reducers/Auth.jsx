@@ -3,6 +3,7 @@ const innitialState = {
     userData: null,
     token: null,
     loading: true,
+    user: null,
 };
 
 const Auth = (state = innitialState, action) => {
@@ -26,6 +27,11 @@ const Auth = (state = innitialState, action) => {
             return {
                 ...state,
                 token: payload.token
+            }
+        case "GET_USER":
+            return {
+                ...state,
+                user: payload
             }
         case "AUTH_ERROR":
             return {
