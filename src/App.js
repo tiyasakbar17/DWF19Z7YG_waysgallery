@@ -32,12 +32,15 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Landing} /> {/* Done */}
-          <UserRouter exact path="/home" component={Home} />
-          <UserRouter exact path="/addPost/" component={AddPost} />
-          <UserRouter exact path="/post/:id" component={DetailPost} />
-          <UserRouter exact path="/profile/:id" component={Profile} />
-          <UserRouter exact path="/editProfile/" component={EditProfile} />
-          <UserRouter exact path="/hired/:id" component={Hired} />
+          <UserRouter exact path="/home" component={Home} /> {/* Done */}
+          <UserRouter exact path="/addPost/" component={AddPost} /> {/* Done */}
+          <UserRouter exact path="/post/:id" component={DetailPost} />{" "}
+          {/* Done */}
+          <UserRouter exact path="/profile/:id" component={Profile} />{" "}
+          {/* Done */}
+          <UserRouter exact path="/editProfile/" component={EditProfile} />{" "}
+          {/* Done */}
+          <UserRouter exact path="/hired/:id" component={Hired} /> {/* Done */}
           <UserRouter exact path="/order" component={Order} />
           <UserRouter exact path="/addProject/:id" component={AddProject} />
           <UserRouter exact path="/project/:id" component={Project} />

@@ -55,6 +55,6 @@ export const addPost = (data) => async dispatch => {
         const result = await Axios.post(`${baseUrl}/post`, data, configForm(dispatch))
         dispatch(showPopUp(result.data.message))
     } catch (error) {
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }

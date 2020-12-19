@@ -39,6 +39,7 @@ export const loadData = () => async dispatch => {
         dispatch({
             type: "AUTH_ERROR",
         });
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const userLogin = (data) => async dispatch => {
@@ -52,7 +53,7 @@ export const userLogin = (data) => async dispatch => {
         dispatch(loadData())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const userRegister = (data) => async dispatch => {
@@ -66,7 +67,7 @@ export const userRegister = (data) => async dispatch => {
         dispatch(loadData())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const editProfile = (data) => async dispatch => {
@@ -75,7 +76,7 @@ export const editProfile = (data) => async dispatch => {
         dispatch(loadData())
         dispatch(showPopUp(result.data.message))
     } catch (error) {
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const addArts = (data) => async dispatch => {
@@ -83,7 +84,7 @@ export const addArts = (data) => async dispatch => {
         const result = await Axios.post(`${baseUrl}/art`, data, configForm(dispatch))
         dispatch(showPopUp(result.data.message))
     } catch (error) {
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const getUser = (data) => async dispatch => {
@@ -99,7 +100,7 @@ export const getUser = (data) => async dispatch => {
         dispatch(closeLoading())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp("Something Went Wrong"))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const logout = () => dispatch => {

@@ -38,7 +38,7 @@ export const loadAllOrders = (data) => async dispatch => {
         dispatch(closeLoading())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const addHired = (data) => async dispatch => {
@@ -49,7 +49,7 @@ export const addHired = (data) => async dispatch => {
         dispatch(showPopUp("We have sent your offer, please wait for the user to accept it"))
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const hiredAction = (data, id) => async dispatch => {
@@ -61,7 +61,7 @@ export const hiredAction = (data, id) => async dispatch => {
         dispatch(loadAllOrders(id))
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const submitProject = (data) => async dispatch => {
@@ -69,6 +69,6 @@ export const submitProject = (data) => async dispatch => {
         const result = await Axios.post(`${baseUrl}/project`, data, configForm(dispatch))
         dispatch(showPopUp(result.data.message))
     } catch (error) {
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
