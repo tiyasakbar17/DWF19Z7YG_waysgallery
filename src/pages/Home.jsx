@@ -5,46 +5,110 @@ import { getPosts } from '../redux/actions/Posts'
 
 function Home({ Posts, getPosts }) {
 
-    const [state, setState] = useState(false)
-
-    const today = () => {
-        setState(false)
+    const innitialState = {
+        options: true,
+        search: '',
+        message: "today's posts"
     }
-    const all = () => {
-        setState(true)
+
+    const [state, setState] = useState(innitialState)
+
+
+    const changeHandler = (e) => {
+        setState(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+            message: (e.target.name === "options") ? (e.target.value === "true" ? "today's posts" : "all posts") : ""
+        }))
     }
 
     React.useEffect(() => {
         getPosts()
     }, [])
 
-    // const created = Date.now() - new Date(.createdAt).getTime();
+    const postsToday = Posts.posts ? Posts.posts.filter(post => (Date.now() - new Date(post.createdAt).getTime()) < (24 * 60 * 60 * 1000)) : "";
+    const allPosts = Posts.posts ? Posts.posts.map(photo => photo) : ""
 
-    const photosToday = Posts.photos ? Posts.photos.filter(photo => (Date.now() - new Date(photo.createdAt).getTime()) < (24 * 60 * 60 * 1000)) : "";
-    const allPhotos = Posts.photos ? Posts.photos.map(photo => photo) : ""
-
+    const ShowToday = () => {
+        return (
+            <>
+                {
+                    postsToday.map(post => {
+                        return (
+                            <div className="photoContainer pointer">
+                                <Card image={post.photos[0].image} postId={post.id} key={post.id} />
+                            </div>
+                        )
+                    })
+                }
+            </>
+        )
+    }
+    const ShowAll = () => {
+        return (
+            <>
+                {
+                    allPosts.map(post => {
+                        return (
+                            <div className="photoContainer pointer">
+                                <Card image={post.photos[0].image} postId={post.id} key={post.id} />
+                            </div>
+                        )
+                    })
+                }
+            </>
+        )
+    }
 
     if (!Posts.photos) {
-        return (<h1>Loading....</h1>)
-    } else {
-
         return (
-            <div style={{ margin: "121px 80px" }}>
-                <div className="border flex" style={{ flexWrap: "wrap" }}>
-                    <button onClick={today}>Today's Post</button>
-                    <button onClick={all}>All Posts</button>
-                    <h1>{state ? "All Posts" : "Today's Post"}</h1>
-                    {state ? photosToday.map(photo => {
-                        return (
-                            <Card image={photo.image} postId={photo.postId} key={photo.id} />
-                        )
-                    }) : allPhotos.map(photo => {
-                        return (
-                            <Card image={photo.image} postId={photo.postId} key={photo.id} />
-                        )
-                    })}
+            <div></div>
+        )
+    } else {
+        return (
+            <div className="container">
+                <div className="flex">
+                    <div className="headerPartLeft">
+                        <select onChange={changeHandler} name="options" className="postSelector">
+                            <option value={true}>Today</option>
+                            <option value={false}>All Posts</option>
+                        </select>
+                    </div>
+                    <div className="headerPartRight">
+                        <div className="searchBar flex">
+                            <i className="fas fa-search"></i>
+                            <input type="text" name="search" placeholder="Search" onChange={changeHandler} value={state.search} className="searchInput" />
+                        </div>
+                    </div>
+                </div>
+                <div className="middleHome">
+                    <span><strong>{state.message}</strong></span>
+                </div>
+                <div className="postContainer">
+                    {
+                        state.options ? <ShowToday /> : <ShowAll />
+                    }
                 </div>
             </div>
+
+
+
+            // <div style={{ margin: "121px 80px" }}>
+            //     <div className="border flex" style={{ flexWrap: "wrap" }}>
+            //         <button onClick={today}>Today's Post</button>
+            //         <button onClick={all}>All Posts</button>
+            //         <h1>{state ? "All Posts" : "Today's Post"}</h1>
+            //         {state ? photosToday.map(photo => {
+            //             return (
+            //                 <Card image={photo.image} postId={photo.postId} key={photo.id} />
+            //             )
+            //         }) : allPhotos.map(photo => {
+            //             return (
+            //                 <Card image={photo.image} postId={photo.postId} key={photo.id} />
+            //             )
+            //         })}
+            //     </div>
+            // </div>
         )
     }
 

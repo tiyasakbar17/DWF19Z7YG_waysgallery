@@ -10,9 +10,7 @@ const Card = ({ image, postId }) => {
     }
 
     return (
-        <div onClick={clickHandler} className="border pointer" style={{ width: "200px", height: "150px", margin: "10px", borderRadius: "10px" }}>
-            <img src={`http://localhost:5000/uploads/${image}`} alt="gambar" className="image" />
-        </div>
+        <img onClick={clickHandler} src={`http://localhost:5000/uploads/${image}`} alt="gambar" className="image" />
     )
 }
 

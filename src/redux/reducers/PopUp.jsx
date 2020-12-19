@@ -1,7 +1,6 @@
 const innitialState = {
     isPoped: false,
     message: "",
-    loading: true,
     loadingComp: false,
     progress: {
         isShown: false,

@@ -8,3 +8,295 @@
   padding: 30px 20px;
   background-color: white;
 }
+
+/* ////// */
+/* HEADER */
+/* ////// */
+.header {
+  height: 80px;
+  width: 100%;
+  border-bottom: 2px rgb(132, 129, 129) solid;
+  position: fixed;
+  top: 0;
+  background-color: whitesmoke;
+}
+.headerPartLeft {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding-left: 10%;
+}
+.headerPartRight {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding-right: 10%;
+}
+.headerLogo {
+  width: 80px;
+  height: auto;
+  overflow: hidden;
+}
+.headerImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: aqua;
+}
+.uploadPost {
+  margin-right: 20px;
+  width: 100px;
+  height: 30px;
+}
+
+/* //////// */
+/* DROPDOWN */
+/* //////// */
+.dropDown {
+  position: fixed;
+  z-index: 11;
+  top: 86px;
+  right: 10.4%;
+  width: 220px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1px #2fc4b2 solid;
+}
+.triangle {
+  position: absolute;
+  top: -8%;
+  right: 0;
+}
+.dropItem {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+}
+div.dropItem:hover {
+  color: #2fc4b2;
+}
+.dropLine {
+  border-bottom: 2px rgb(87, 87, 87) solid;
+}
+.dropDownIcon {
+  margin-right: 15px;
+  margin-left: 10px;
+  font-size: 30px;
+}
+
+/* ///////////// */
+/*    LANDING    */
+/* ///////////// */
+
+.landingContainer {
+  position: relative;
+  width: 462px;
+  top: 18%;
+  left: 10%;
+}
+.mainTitle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 85px;
+  line-height: 102.02px;
+}
+.mainLogo {
+  position: absolute;
+  top: -10%;
+  right: 22%;
+}
+.secondaryLogo {
+  position: absolute;
+  bottom: 16%;
+  left: 24%;
+}
+.mainWords {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  font-size: 24px;
+}
+.secondaryWords {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.landingButtons {
+  display: flex;
+  margin-top: 20px;
+  width: 350px;
+  height: 30px;
+  font-size: 14px;
+}
+div.landingButtons button.button.text-white {
+  margin-right: 20px;
+  background-color: #2fc4b2;
+}
+div.landingButtons button.button.text-black {
+  background-color: #e7e7e7;
+}
+
+/* ///////////// */
+/* MODAL LANDING */
+/* ///////////// */
+
+.modalBackground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-content: center center;
+  background-color: rgba(0, 0, 0, 0.174);
+}
+.landingPop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-content: center center;
+  z-index: 1;
+}
+.modalContainer {
+  width: 416px;
+  border-radius: 10px;
+  background-color: white;
+  box-sizing: border-box;
+  padding-bottom: 7.5%;
+  padding-top: 7.5%;
+  position: relative;
+  border: 1px #2fc4b2 solid;
+  z-index: 1;
+}
+.modalTitle {
+  font-size: 36px;
+  color: #2fc4b2;
+  margin-bottom: 20px;
+  padding-left: 7%;
+}
+.formContainer {
+  text-align: center;
+  width: 85%;
+  margin: auto;
+}
+div.modalInput input.input {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+div.modalInput button.button {
+  margin-bottom: 10px;
+  margin-top: 13px;
+  font-size: 18px;
+}
+.modalCloser {
+  position: absolute;
+  top: -2%;
+  right: -2%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #2fc4b2;
+  display: grid;
+  place-content: center center;
+  border: 2px whitesmoke solid;
+  box-sizing: border-box;
+}
+
+/* ///////////// */
+/*     POP UP    */
+/* ///////////// */
+
+.popUpPage {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-content: center center;
+}
+.popUpContainer {
+  width: 742px;
+  height: auto;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border: 1px #2fc4b2 solid;
+  text-align: center;
+  font-size: 14px;
+  background-color: white;
+  position: relative;
+  border-radius: 10px;
+}
+.popUpCloser {
+  position: absolute;
+  top: -15%;
+  right: -2%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #2fc4b2;
+  display: grid;
+  place-content: center center;
+  border: 2px whitesmoke solid;
+  box-sizing: border-box;
+}
+
+/* ///////////// */
+/*      HOME     */
+/* ///////////// */
+
+.postSelector {
+  background-color: #e7e7e7;
+  padding: 5px 7px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.searchBar {
+  background-color: #e7e7e7;
+  width: auto;
+  padding: 5px 7px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+div.searchBar.flex input.searchInput {
+  height: 100%;
+  border: none;
+  margin-left: 4px;
+  background-color: #e7e7e7;
+  color: black;
+}
+.middleHome {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  margin-left: 10%;
+  font-size: 18px;
+}
+.postContainer {
+  width: 95%;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.photoContainer {
+  width: 23%;
+  height: auto;
+  margin: 0.8% 1%;
+}

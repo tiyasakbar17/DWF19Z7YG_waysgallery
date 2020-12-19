@@ -35,7 +35,7 @@ export const Profile = ({ Auth, getUser }) => {
                     {Auth.user.id === Auth.userData.id ? (
                         <button onClick={() => history.push("/editProfile")}>Edit Profile</button>
                     ) : (
-                            <><button>follow</button><button>Hire</button></>
+                            <><button>follow</button><button onClick={() => history.push(`/hired/${Auth.user.id}`)} >Hire</button></>
                         )}
                 </div>
                 <div className="border flex flexwrap">

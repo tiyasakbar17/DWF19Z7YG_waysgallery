@@ -33,9 +33,12 @@ const Auth = (state = innitialState, action) => {
                 ...state,
                 user: payload
             }
+        case "LOGOUT":
+            localStorage.removeItem("token");
         case "AUTH_ERROR":
             return {
-                ...innitialState
+                ...innitialState,
+                loading: false,
             }
         default:
             return state;

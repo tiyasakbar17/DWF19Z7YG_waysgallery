@@ -2,16 +2,37 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { logout } from '../redux/actions/Auth'
-import Auth from '../redux/reducers/Auth'
 
-function Dropdown({ Auth, logout }) {
+function Dropdown({ Auth, logout, closeDD }) {
 
     const history = useHistory()
+
+    const pushLogout = () => {
+        closeDD()
+        logout()
+    };
+    const pushOrders = () => {
+        closeDD()
+        history.push("/order")
+    };
+    const pushProfile = () => {
+        closeDD()
+        history.push(`/profile/${Auth.userData.id}`)
+    };
     return (
-        <div className="flex flex-column border warning" style={{ width: "200px", height: "auto", padding: "10px", position: "fixed", top: "20%", zIndex: "100", right: "10%" }}>
-            <span className="border success pointer" onClick={() => history.push(`/profile/${Auth.userData.id}`)}>Profile</span>
-            <span className="border success pointer" onClick={() => history.push("/order")}>Order</span>
-            <span className="border success pointer" onClick={() => logout()}>Logout</span>
+        <div className="dropDown">
+            <img src="/img/DropDown.svg" alt="triangle" className="triangle" />
+            <div className="dropItem pointer" onClick={pushProfile} >
+                <i className="far fa-user dropDownIcon" style={{ color: "skyblue" }}></i>
+                <strong>Profile</strong> </div>
+            <div className="dropItem pointer" onClick={pushOrders} >
+                <i className="fas fa-file-invoice-dollar dropDownIcon" style={{ color: "#00E016" }}> </i>
+                <strong>Orders</strong></div>
+            <div className="dropLine"></div>
+            <div className="dropItem pointer" onClick={pushLogout} >
+                <i className="fas fa-sign-out-alt dropDownIcon" style={{ color: "red" }}></i>
+                <strong>Logout</strong>
+            </div>
         </div>
     )
 

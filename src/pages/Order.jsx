@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Table from '../components/Order/Table'
+import { loadAllOrders } from '../redux/actions/Hired'
 
-export const Order = ({ Auth }) => {
+export const Order = ({ Auth, Hired, loadAllOrders }) => {
+
+    React.useEffect(() => {
+        loadAllOrders(Auth.userData.id)
+    }, [])
 
     const initialState = {
         status: true
@@ -14,42 +19,48 @@ export const Order = ({ Auth }) => {
         setState(prevstate => ({ status: get }))
     }
 
-    return (
-        <div style={{ margin: "121px 80px" }}>
-            <div className="">
-                <button onClick={() => clickHandler(true)}>My Orders</button>
-                <button onClick={() => clickHandler(false)}>Offers</button>
+    if (Hired.loading) {
+        return (
+            <h1>LOADING.....</h1>
+        )
+    } else {
+        return (
+            <div style={{ margin: "121px 80px" }}>
+                <div className="">
+                    <button onClick={() => clickHandler(true)}>My Orders</button>
+                    <button onClick={() => clickHandler(false)}>Offers</button>
+                </div>
+                <table className="">
+                    <thead className="text-success">
+                        <tr>
+                            <th>No</th>
+                            <th>Vendor</th>
+                            <th>Order</th>
+                            <th>Start Project</th>
+                            <th>End Project</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {state.status ? (Hired.orders ? Hired.orders.map((user, i) => {
+                            i += 1;
+                            return (<Table user={user} userId={Auth.userData.id} counter={i} key={i} />)
+                        }) : "") : (Hired.hires ? Hired.hires.map((user, i) => {
+                            i += 1;
+                            return (<Table user={user} userId={Auth.userData.id} counter={i} key={i} />)
+                        }) : "")}
+                    </tbody>
+                </table>
             </div>
-            <table className="">
-                <thead className="text-success">
-                    <tr>
-                        <th>No</th>
-                        <th>Vendor</th>
-                        <th>Order</th>
-                        <th>Start Project</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {state.status ? (Auth.userData.offers ? Auth.userData.offers.map((user, i) => {
-                        i += 1;
-                        return (<Table user={user} counter={i} key={i} />)
-                    }) : "") : (Auth.userData.hires ? Auth.userData.hires.map((user, i) => {
-                        i += 1;
-                        return (<Table user={user} counter={i} key={i} />)
-                    }) : "")}
-                </tbody>
-            </table>
-
-        </div>
-    )
-
+        )
+    }
 }
 
 const mapStateToProps = (state) => ({
+    Hired: state.Hired,
     Auth: state.Auth
 })
 
 
-export default connect(mapStateToProps)(Order)
+export default connect(mapStateToProps, { loadAllOrders })(Order)

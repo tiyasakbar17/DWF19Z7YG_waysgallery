@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { popUp } from './PopUp';
+import { closeLoading, showLoading, showPopUp, showProgress } from './PopUp';
 import SetAuthToken from './setAuthToken'
 
 const configJson = {
@@ -15,12 +15,14 @@ const configForm = (dispatch) => ({
         let percentage = Math.round(
             (ProgressEvent.loaded * 100) / ProgressEvent.total
         );
-        // dispatch(showProgress(percentage));
+        dispatch(showProgress(percentage));
     },
 });
 const baseUrl = 'http://localhost:5000/api/v1'
 
 export const loadData = () => async dispatch => {
+
+    dispatch(showLoading())
     if (localStorage.getItem("token")) {
         SetAuthToken(localStorage.getItem("token"));
     }
@@ -31,7 +33,9 @@ export const loadData = () => async dispatch => {
             type: "LOAD_DATA",
             payload: result.data.data.user,
         });
+        dispatch(closeLoading())
     } catch (error) {
+        dispatch(closeLoading())
         dispatch({
             type: "AUTH_ERROR",
         });
@@ -39,6 +43,7 @@ export const loadData = () => async dispatch => {
 }
 export const userLogin = (data) => async dispatch => {
     try {
+        dispatch(showLoading())
         const results = await Axios.post(`${baseUrl}/login`, data, configJson)
         dispatch({
             type: "LOGIN",
@@ -46,11 +51,13 @@ export const userLogin = (data) => async dispatch => {
         })
         dispatch(loadData())
     } catch (error) {
-        console.log(error);
+        dispatch(closeLoading())
+        dispatch(showPopUp(error.response.message))
     }
 }
 export const userRegister = (data) => async dispatch => {
     try {
+        dispatch(showLoading())
         const results = await Axios.post(`${baseUrl}/register`, data, configJson)
         dispatch({
             type: "REGISTER",
@@ -58,32 +65,43 @@ export const userRegister = (data) => async dispatch => {
         })
         dispatch(loadData())
     } catch (error) {
-        console.log(error);
+        dispatch(closeLoading())
+        dispatch(showPopUp(error.response.message))
     }
 }
 export const editProfile = (data) => async dispatch => {
     try {
         const result = await Axios.patch(`${baseUrl}/user`, data, configForm(dispatch))
-        dispatch(popUp(result.data.message))
-        console.log(result.data.message);
+        dispatch(loadData())
+        dispatch(showPopUp(result.data.message))
     } catch (error) {
-        console.log(error);
+        dispatch(showPopUp(error.response.message))
+    }
+}
+export const addArts = (data) => async dispatch => {
+    try {
+        const result = await Axios.post(`${baseUrl}/art`, data, configForm(dispatch))
+        dispatch(showPopUp(result.data.message))
+    } catch (error) {
+        dispatch(showPopUp(error.response.message))
     }
 }
 export const getUser = (data) => async dispatch => {
     try {
-        console.log(data);
+        dispatch(showLoading())
         const result = await Axios.get(`${baseUrl}/user/${data}`, configJson)
         dispatch({
             type: "GET_USER",
             payload: result.data.data.user
         })
+        dispatch(closeLoading())
     } catch (error) {
-        dispatch(popUp(JSON.stringify(error)))
+        dispatch(closeLoading())
+        dispatch(showPopUp(error.response.message))
     }
 }
 export const logout = () => dispatch => {
     dispatch({
-        type: "AUTH_ERROR",
+        type: "LOGOUT",
     })
 }

@@ -1,4 +1,4 @@
-export const popUp = (message) => (dispatch) => {
+export const showPopUp = (message) => (dispatch) => {
     try {
         dispatch({
             type: "POP_UP",

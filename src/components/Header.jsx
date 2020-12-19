@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { logout } from '../redux/actions/Auth';
 import Dropdown from './Dropdown';
-import PopUp from './PopUp'
+import Loading from './PopUps/Loading';
+import PopUps from './PopUps/PopUps'
+import ProgressBar from './PopUps/ProgressBar';
 
 function Header({ Auth, PopUpState, logout }) {
 
@@ -11,21 +13,33 @@ function Header({ Auth, PopUpState, logout }) {
 
     const [state, setState] = React.useState(false)
 
+    const closer = () => {
+        setState(!state)
+    }
 
-    return (// rgb(199, 199, 199)3, 22, 22) 
+    const pushHome = () => history.push("/home");
+    const pushAddPost = () => history.push("/addPost")
+
+
+    return (
         <>
-            {state ? <Dropdown /> : ""}
-            {PopUpState.isPoped ? <PopUp /> : ""}
-            <div className="fixed z-5 top grid justify-content-around align-content-center" style={{ height: "121px", width: "100%", backgroundColor: "white", [!Auth.isLogin ? "opacity" : ""]: "0" }}>
-                <div className="" style={{ width: "80px", height: "50px" }}>
-                    <img onClick={() => history.push("/home")} src={`/img/image 1.png`} alt="img" className="image" />
+            {state ? <Dropdown closeDD={() => setState(false)} /> : null}
+            {PopUpState.isPoped ? <PopUps /> : null}
+            {PopUpState.progress.isShown ? <ProgressBar /> : null}
+            {PopUpState.loadingComp ? <Loading /> : null}
+            <div className={`header flex ${Auth.isLogin ? null : `hidden`}`}>
+                <div className="headerPartLeft">
+                    <div onClick={pushHome} className="headerLogo pointer">
+                        <img src={`/img/image 1.png`} alt="img" className="image" />
+                    </div>
                 </div>
-                <button className="button success" onClick={() => history.push("/addPost")}> addPosts </button>
-                <button className="button success" onClick={() => history.push("/order")}> Order </button>
-                <button className="button success" onClick={() => logout()}> Logout </button>
-                {/* <button className="button success"> </button> */}
-                <div className="pointer" style={{ width: "50px", height: "50px", borderRadius: "50%", backgroundColor: "green", overflow: "hidden" }}>
-                    <img src={`${Auth.userData ? `http://localhost:5000/uploads/${Auth.userData.avatar}` : ""}`} alt="" onClick={() => setState(!state)} />
+                <div className="headerPartRight">
+                    <div onClick={closer} className="headerImage pointer">
+                        <img src={`${Auth.userData ? `http://localhost:5000/uploads/${Auth.userData.avatar}` : ""}`} alt="avatar" className="image" />
+                    </div>
+                    <div className="uploadPost">
+                        <button onClick={pushAddPost} className="button success text-white pointer">Add Post</button>
+                    </div>
                 </div>
             </div>
         </>
