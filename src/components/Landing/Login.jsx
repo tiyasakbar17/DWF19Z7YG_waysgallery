@@ -26,7 +26,7 @@ function Login({ onClick, userLogin, changeShow }) {
             <div className="modalBackground" onClick={onClick}></div>
             <div className="modalContainer">
                 <div className="modalCloser pointer" onClick={onClick}>
-                    <i class="fas fa-times"></i>
+                    <i className="fas fa-times"></i>
                 </div>
                 <div className="modalTitle">
                     <span><strong>Login</strong></span>

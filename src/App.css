@@ -18,6 +18,7 @@
   border-bottom: 2px rgb(132, 129, 129) solid;
   position: fixed;
   top: 0;
+  z-index: 1;
   background-color: whitesmoke;
 }
 .headerPartLeft {
@@ -51,6 +52,9 @@
   margin-right: 20px;
   width: 100px;
   height: 30px;
+}
+.editPost {
+  width: 80px;
 }
 
 /* //////// */
@@ -299,4 +303,258 @@ div.searchBar.flex input.searchInput {
   width: 23%;
   height: auto;
   margin: 0.8% 1%;
+}
+
+/* ///////////// */
+/*  DETAIL POST  */
+/* ///////////// */
+
+.detailPost {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 130px;
+}
+.upperDetailPost {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+.upperDetailPostLeft {
+  display: flex;
+  width: 50%;
+  height: 100%;
+  align-items: center;
+}
+.upperDetailPostRight {
+  display: grid;
+  width: 50%;
+  height: inherit;
+  place-content: center right;
+}
+.buttonPlacer {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100%;
+}
+.postName {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+div.upperDetailPostRight button.text-white {
+  background-color: #2fc4b2;
+  padding: 3% 15%;
+}
+div.upperDetailPostRight button.text-black {
+  background-color: #e7e7e7;
+  padding: 3% 15%;
+}
+.mainPostPict {
+  width: 100%;
+  height: 545px;
+}
+.listPostPic {
+  display: flex;
+  height: 90px;
+  width: 100%;
+  margin-top: 10px;
+}
+.postPictSlider {
+  height: 100%;
+  width: 20%;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.postDetails {
+  margin-top: 25px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ///////////// */
+/*    PROFILE    */
+/* ///////////// */
+
+.bodyProfile {
+  width: 80%;
+  position: relative;
+  margin: 0 auto;
+}
+.profileBack {
+  position: absolute;
+  top: 0;
+  right: -12.5%;
+  width: 307px;
+  height: 400px;
+  border-radius: 5px;
+  background-color: #2fc4b2;
+  margin-top: -18px;
+}
+.upperProfileBody {
+  width: 100%;
+}
+.upperProfieLeft {
+  width: 38%;
+  padding-top: 5%;
+}
+.upperProfieRight {
+  width: 71%;
+}
+.profilePict {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: whitesmoke;
+}
+.userDetails {
+  margin-top: 20px;
+}
+.ProfileButton {
+  margin-top: 50px;
+  width: 100%;
+}
+div.ProfileButton button.text-black {
+  background-color: #e7e7e7;
+  padding: 2%;
+  width: 30%;
+}
+div.ProfileButton button.text-white {
+  background-color: #2fc4b2;
+  padding: 2%;
+  width: 30%;
+}
+div.ProfileButton button.text-white {
+  width: 35%;
+}
+.profilePostContainer {
+  position: relative;
+  width: 600px;
+  height: 450px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.artPage {
+  margin-top: 40px;
+}
+.artContainer {
+  margin-top: 30px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* ///////////// */
+/*     HIRED     */
+/* ///////////// */
+
+.hiredContainer {
+  width: 100%;
+  padding-top: 30px;
+}
+.formHiredContainer {
+  width: 50%;
+  margin: auto;
+}
+textarea.inputHired {
+  margin-bottom: 0px;
+}
+.inputHired {
+  margin-bottom: 20px;
+  height: 40px;
+}
+.textArea {
+  height: 200px;
+}
+.leftDate {
+  width: 47%;
+}
+.rightDate {
+  width: 47%;
+}
+.price {
+  margin-top: 20px;
+}
+.hiredButtons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+div.hiredButtons button.text-black {
+  background-color: #e7e7e7;
+  padding: 1%;
+  width: 15%;
+  margin: 0 10px;
+}
+div.hiredButtons button.text-white {
+  background-color: #2fc4b2;
+  padding: 1%;
+  width: 15%;
+  margin: 0 10px;
+}
+
+/* //////////// */
+/* EDIT PROFILE */
+/* //////////// */
+
+.editProfileContainer {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 130px;
+}
+.editLeftPart {
+  width: 63%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 20px;
+}
+.editRightPart {
+  width: 28%;
+  height: inherit;
+}
+.fileDropper {
+  width: 80%;
+  height: 400px;
+  background-color: whitesmoke;
+  border: 4px rgb(198, 173, 173) dashed;
+  display: grid;
+  grid-auto-flow: column;
+  place-content: center center;
+}
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 4px rgb(198, 173, 173) dashed;
+  margin: 0 auto 30px auto;
+  background-color: whitesmoke;
+}
+div.changePict {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  opacity: 0;
+  position: absolute;
+  display: grid;
+  place-content: center center;
+  color: #2fc4b2;
+  overflow: hidden;
+}
+div.profileImage:hover .changePict {
+  cursor: pointer;
+  opacity: 1;
+  top: 0;
+  z-index: 1;
+}
+.editProfileButton {
+  width: 30%;
+  margin: 20px auto;
+}
+div.editProfileButton button {
+  color: white;
 }

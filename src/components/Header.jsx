@@ -35,10 +35,10 @@ function Header({ Auth, PopUpState, logout }) {
                 </div>
                 <div className="headerPartRight">
                     <div onClick={closer} className="headerImage pointer">
-                        <img src={`${Auth.userData ? `http://localhost:5000/uploads/${Auth.userData.avatar}` : ""}`} alt="avatar" className="image" />
+                        <img src={Auth.userData ? Auth.userData.avatar ? `http://localhost:5000/uploads/${Auth.userData.avatar}` : "/logo512.png" : null} alt="avatar" className="image" />
                     </div>
                     <div className="uploadPost">
-                        <button onClick={pushAddPost} className="button success text-white pointer">Add Post</button>
+                        <button onClick={pushAddPost} className="button primary text-white pointer">Add Post</button>
                     </div>
                 </div>
             </div>

@@ -23,9 +23,6 @@ export const getPosts = () => async dispatch => {
             type: "GET_POSTS",
             payload: results.data.data.posts
         })
-        dispatch({
-            type: "LOAD_PHOTOS",
-        })
         dispatch(closeLoading())
     } catch (error) {
         dispatch(closeLoading())
@@ -35,6 +32,9 @@ export const getPosts = () => async dispatch => {
 export const getPost = (id) => async dispatch => {
     try {
         dispatch(showLoading())
+        dispatch({
+            type: "LOADING_POST",
+        })
         const result = await Axios.get(`${baseUrl}/post/${id}`)
         dispatch({
             type: "GET_POST",
@@ -42,8 +42,12 @@ export const getPost = (id) => async dispatch => {
         })
         dispatch(closeLoading())
     } catch (error) {
+        dispatch({
+            type: "GET_POST",
+            payload: null
+        })
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp("No Post Found"))
     }
 }
 export const addPost = (data) => async dispatch => {

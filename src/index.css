@@ -6,6 +6,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* fontSizing */
+.f-14 {
+  font-size: 14px;
+}
+.f-18 {
+  font-size: 18px;
+}
+.f-24 {
+  font-size: 24px;
+}
+.f-36 {
+  font-size: 36px;
+}
+.ml-5 {
+  margin-left: 7px;
+}
 
 /* MARgIN HEADER */
 .container {
@@ -19,11 +35,13 @@ body {
   height: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: thin #2fc4b2 solid;
+  border: 1px #2fc4b2 solid;
   box-sizing: border-box;
+  background-color: whitesmoke;
 }
 /* BUTTON */
 .button {
+  cursor: pointer;
   width: 100%;
   height: 100%;
   padding: 10px;

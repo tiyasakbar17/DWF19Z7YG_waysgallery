@@ -27,7 +27,7 @@ function Login({ onClick, userRegister, changeShow }) {
             <div className="modalBackground" onClick={onClick}></div>
             <div className="modalContainer">
                 <div className="modalCloser pointer" onClick={onClick}>
-                    <i class="fas fa-times"></i>
+                    <i className="fas fa-times"></i>
                 </div>
                 <div className="modalTitle">
                     <span><strong>Register</strong></span>
@@ -41,7 +41,7 @@ function Login({ onClick, userRegister, changeShow }) {
                             <input type="password" className="input" name="password" value={state.password} placeholder="Password" onChange={changeHandler} required />
                         </div>
                         <div className="modalInput">
-                            <input type="text" className="input" name="fullName" value={state.fullName} placeholder="Password" onChange={changeHandler} required />
+                            <input type="text" className="input" name="fullName" value={state.fullName} placeholder="Full Name" onChange={changeHandler} required />
                         </div>
                         <div className="modalInput">
                             <button type="submit" className="white primary button pointer">Login</button>

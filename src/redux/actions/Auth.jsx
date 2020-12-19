@@ -90,14 +90,16 @@ export const getUser = (data) => async dispatch => {
     try {
         dispatch(showLoading())
         const result = await Axios.get(`${baseUrl}/user/${data}`, configJson)
-        dispatch({
-            type: "GET_USER",
-            payload: result.data.data.user
-        })
+        if (result) {
+            dispatch({
+                type: "GET_USER",
+                payload: result.data.data.user
+            })
+        }
         dispatch(closeLoading())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp("Something Went Wrong"))
     }
 }
 export const logout = () => dispatch => {

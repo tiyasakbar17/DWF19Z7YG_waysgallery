@@ -6,7 +6,7 @@ import { getPosts } from '../redux/actions/Posts'
 function Home({ Posts, getPosts }) {
 
     const innitialState = {
-        options: true,
+        options: 'true',
         search: '',
         message: "today's posts"
     }
@@ -26,8 +26,9 @@ function Home({ Posts, getPosts }) {
         getPosts()
     }, [])
 
-    const postsToday = Posts.posts ? Posts.posts.filter(post => (Date.now() - new Date(post.createdAt).getTime()) < (24 * 60 * 60 * 1000)) : "";
-    const allPosts = Posts.posts ? Posts.posts.map(photo => photo) : ""
+    let postsToday = []
+    const copyPost = Posts.posts ? Posts.posts.map(post => (Date.now() - new Date(post.createdAt).getTime()) < (24 * 60 * 60 * 1000) ? postsToday.push(post) : null) : null;
+    const allPosts = Posts.posts
 
     const ShowToday = () => {
         return (
@@ -35,8 +36,8 @@ function Home({ Posts, getPosts }) {
                 {
                     postsToday.map(post => {
                         return (
-                            <div className="photoContainer pointer">
-                                <Card image={post.photos[0].image} postId={post.id} key={post.id} />
+                            <div className="photoContainer pointer" key={post.id}>
+                                <Card image={post.photos[0].image} postId={post.id} />
                             </div>
                         )
                     })
@@ -50,8 +51,8 @@ function Home({ Posts, getPosts }) {
                 {
                     allPosts.map(post => {
                         return (
-                            <div className="photoContainer pointer">
-                                <Card image={post.photos[0].image} postId={post.id} key={post.id} />
+                            <div className="photoContainer pointer" key={post.id} >
+                                <Card image={post.photos[0].image} postId={post.id} />
                             </div>
                         )
                     })
@@ -60,7 +61,7 @@ function Home({ Posts, getPosts }) {
         )
     }
 
-    if (!Posts.photos) {
+    if (!Posts.posts) {
         return (
             <div></div>
         )
@@ -86,29 +87,10 @@ function Home({ Posts, getPosts }) {
                 </div>
                 <div className="postContainer">
                     {
-                        state.options ? <ShowToday /> : <ShowAll />
+                        state.options === 'true' ? <ShowToday /> : <ShowAll />
                     }
                 </div>
             </div>
-
-
-
-            // <div style={{ margin: "121px 80px" }}>
-            //     <div className="border flex" style={{ flexWrap: "wrap" }}>
-            //         <button onClick={today}>Today's Post</button>
-            //         <button onClick={all}>All Posts</button>
-            //         <h1>{state ? "All Posts" : "Today's Post"}</h1>
-            //         {state ? photosToday.map(photo => {
-            //             return (
-            //                 <Card image={photo.image} postId={photo.postId} key={photo.id} />
-            //             )
-            //         }) : allPhotos.map(photo => {
-            //             return (
-            //                 <Card image={photo.image} postId={photo.postId} key={photo.id} />
-            //             )
-            //         })}
-            //     </div>
-            // </div>
         )
     }
 

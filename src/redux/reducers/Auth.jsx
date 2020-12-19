@@ -24,9 +24,10 @@ const Auth = (state = innitialState, action) => {
                 token: payload.token
             }
         case "REGISTER":
+            localStorage.setItem("token", payload);
             return {
                 ...state,
-                token: payload.token
+                token: payload
             }
         case "GET_USER":
             return {

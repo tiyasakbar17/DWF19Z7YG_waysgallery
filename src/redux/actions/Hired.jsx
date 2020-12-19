@@ -46,7 +46,7 @@ export const addHired = (data) => async dispatch => {
         dispatch(showLoading())
         const result = await Axios.post(`${baseUrl}/hired`, data, configJson)
         dispatch(closeLoading())
-        dispatch(showPopUp(result.data.message))
+        dispatch(showPopUp("We have sent your offer, please wait for the user to accept it"))
     } catch (error) {
         dispatch(closeLoading())
         dispatch(showPopUp(error.response.message))

@@ -8,42 +8,85 @@ export const Profile = ({ Auth, getUser }) => {
 
     const history = useHistory()
 
-    const photos = [];
-    const pusher = Auth.user ? Auth.user.posts.map((post) => post.photos.map(photo => {
-        photos.push(photo)
-    })) : "";
-
     const { id } = useParams()
 
     React.useEffect(() => {
-
         getUser(id);
-    }, [])
+    }, [id])
+
+    const pushHired = () => {
+        history.push(`/hired/${Auth.user.id}`)
+    }
+    const pushEdit = () => {
+        history.push("/editProfile")
+    }
 
     if (!Auth.user) {
         return (
-            <h1>LOADING.......</h1>
+            <div></div>
         )
     } else {
         return (
-            <div style={{ margin: "121px 80px" }}>
-                <div className="border" style={{ width: "120px", height: "120px", borderRadius: "50%", overflow: "hidden" }}>
-                    <img src={`http://localhost:5000/uploads/${Auth.user.avatar}`} alt="" className="image" />
-                </div>
-                <div className="border">
-                    <h3>{Auth.user.fullName}</h3>
-                    {Auth.user.id === Auth.userData.id ? (
-                        <button onClick={() => history.push("/editProfile")}>Edit Profile</button>
-                    ) : (
-                            <><button>follow</button><button onClick={() => history.push(`/hired/${Auth.user.id}`)} >Hire</button></>
-                        )}
-                </div>
-                <div className="border flex flexwrap">
-                    {photos ? (
-                        photos.map(photo => {
-                            return (<Card image={photo.image} postId={photo.postId} />)
-                        })
-                    ) : ""}
+            <div className="container">
+                <div className="bodyProfile">
+                    <div className="profileBack"></div>
+                    <div className="upperProfileBody flex">
+                        <div className="upperProfieLeft">
+                            <div className="profilePict">
+                                <img src={Auth.user.avatar ? `http://localhost:5000/uploads/${Auth.user.avatar}` : "/logo512.png"} alt="avatar" className="image" />
+                            </div>
+                            <div className="userDetails">
+                                <span className="f-18" >
+                                    <strong>{Auth.user.fullName}</strong>
+                                </span>
+                            </div>
+                            <div className="userDetails">
+                                <span className="f-36"><strong>
+                                    {
+                                        Auth.user.greeting
+                                    }
+                                </strong></span>
+                            </div>
+                            <div className="ProfileButton flex">
+                                {Auth.user.id !== Auth.userData.id ?
+                                    <>
+                                        <button className="text-black button pointer">Follow</button>
+                                        <button onClick={pushHired} className="text-white button pointer" >Hire</button>
+                                    </> :
+                                    <button onClick={pushEdit} className="text-white button editProfile pointer" >Edit Profile</button>
+                                }
+                            </div>
+                        </div>
+                        <div className="upperprofileRight">
+                            <div className="profilePostContainer">
+                                {
+                                    Auth.user.posts.length === 0 ?
+                                        null :
+                                        <img src={`http://localhost:5000/uploads/${Auth.user.posts[0].photos[0].image}`} alt="Last Post" className="image" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="artPage">
+                        <span><strong>
+                            {
+                                Auth.user.id !== Auth.userData.id ?
+                                    "Geralt Works" : "My Works"
+                            }
+                        </strong></span>
+                        <div className="artContainer">
+                            {
+                                Auth.user.arts ? Auth.user.arts.map(art => {
+                                    return (
+                                        <div className="photoContainer pointer" key={art.id} >
+                                            <Card image={art.art} postId={art.id} />
+                                        </div>
+                                    )
+                                }) :
+                                    null
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         )

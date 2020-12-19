@@ -3,6 +3,7 @@ const innitialState = {
     posts: null,
     photos: null,
     post: null,
+    loadingPost: true
 };
 
 const Posts = (state = innitialState, action) => {
@@ -14,20 +15,17 @@ const Posts = (state = innitialState, action) => {
                 posts: payload,
                 loading: false
             }
-        case "LOAD_PHOTOS":
-            const photos = [];
-            state.posts.map((post) => post.photos.map(photo => {
-                photos.push(photo)
-            })
-            );
+        case "LOADING_POST":
             return {
                 ...state,
-                photos: photos
+                loadingPost: true
+
             }
         case "GET_POST":
             return {
                 ...state,
-                post: payload
+                post: payload,
+                loadingPost: false
             }
         default:
             return state;

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { addHired } from '../redux/actions/Hired'
 
 export const Hired = ({ addHired }) => {
+
+    const history = useHistory()
 
     const { id } = useParams()
 
@@ -24,23 +26,52 @@ export const Hired = ({ addHired }) => {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        addHired(state)
+        addHired(state).then(() => {
+            history.goBack()
+        })
+    }
 
+    const pushBack = () => {
+        history.goBack()
     }
 
     return (
-        <div style={{ margin: "121px 80px" }}>
-            <div className="" style={{ width: "500px", padding: "10px" }}>
-                <form action="" onSubmit={submitHandler}>
-                    <input type="text" className="input" name="title" onChange={changeHandler} value={state.title} placeholder="Title" />
-                    <input type="text" className="input" name="description" onChange={changeHandler} value={state.description} placeholder="Description" />
-                    <input type="date" className="input" name="startDate" onChange={changeHandler} value={state.startDate} />
-                    <input type="date" className="input" name="endDate" onChange={changeHandler} value={state.endDate} />
-                    <input type="text" className="input" name="price" onChange={changeHandler} value={state.price} placeholder="Price" />
-                    <button type="submit">SUBMIT</button>
+        <div className="container hiredContainer">
+            <div className="formHiredContainer">
+                <form onSubmit={submitHandler}>
+                    <input type="text" className="input inputHired" name="title" onChange={changeHandler} value={state.title} placeholder="Title" required />
+                    <textarea type="text" className="input textArea inputHired" name="description" onChange={changeHandler} value={state.description} placeholder="Description" required />
+                    <div className="flex justify-content-between inputHired" >
+                        <div className="leftDate">
+                            <label htmlFor="startDate">Start Date</label>
+                            <input type="date" className="input inputHired" id="startDate" name="startDate" onChange={changeHandler} value={state.startDate} placeholder="Start Date" required />
+                        </div>
+                        <div className="rightDate">
+                            <label htmlFor="endDate">End Date</label>
+                            <input type="date" className="input inputHired" name="endDate" onChange={changeHandler} value={state.endDate} required />
+                        </div>
+                    </div>
+
+                    <input type="text" className="input price inputHired" name="price" onChange={changeHandler} value={state.price} placeholder="Price" required />
+                    <div className="hiredButtons">
+                        <button onClick={pushBack} type="reset" className="button text-black" >Cancel</button>
+                        <button type="submit" className=" button text-white" >Bidding</button>
+                    </div>
                 </form>
             </div>
         </div>
+        // <div style={{ margin: "121px 80px" }}>
+        //     <div className="" style={{ width: "500px", padding: "10px" }}>
+        // <form action="" onSubmit={submitHandler}>
+        //     <input type="text" className="input" name="title" onChange={changeHandler} value={state.title} placeholder="Title" />
+        //     <input type="text" className="input" name="description" onChange={changeHandler} value={state.description} placeholder="Description" />
+        //     <input type="date" className="input" name="startDate" onChange={changeHandler} value={state.startDate} />
+        //     <input type="date" className="input" name="endDate" onChange={changeHandler} value={state.endDate} />
+        //     <input type="text" className="input" name="price" onChange={changeHandler} value={state.price} placeholder="Price" />
+        //     <button type="submit">SUBMIT</button>
+        // </form>
+        //     </div>
+        // </div>
     )
 }
 
