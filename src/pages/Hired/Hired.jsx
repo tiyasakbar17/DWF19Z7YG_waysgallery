@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import { addHired } from '../redux/actions/Hired'
+import { addHired } from '../../redux/actions/Hired'
 
 export const Hired = ({ addHired }) => {
 

@@ -1,9 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom';
-import { getPost } from '../redux/actions/Posts';
+import { follow } from '../../redux/actions/Auth';
+import { getPost } from '../../redux/actions/Posts';
 
-export const DetailPost = ({ Auth, Posts, getPost }) => {
+export const DetailPost = ({ Auth, Posts, getPost, follow }) => {
+
+    const following = async () => {
+        if (!Posts.post) {
+            return null
+        }
+        const check = await Auth.userData.following.find(follow => follow.followTo === Posts.post.userId)
+        if (!check) {
+            return SetState(prevState => ({
+                ...prevState,
+                followed: 0
+            }))
+        }
+        SetState(prevState => ({
+            ...prevState,
+            followed: 1
+        }))
+    }
 
     const { id } = useParams()
 
@@ -12,9 +30,13 @@ export const DetailPost = ({ Auth, Posts, getPost }) => {
     const innitialValue = {
         preview: '',
         count: 0,
+        followed: 0,
     }
     const [state, SetState] = React.useState(innitialValue)
 
+    React.useEffect(() => {
+        following()
+    }, [Auth.userData.following, Posts.post])
     React.useEffect(() => {
         getPost(id)
         SetState(prevState => ({ ...prevState, count: prevState.count + 1 }))
@@ -43,6 +65,10 @@ export const DetailPost = ({ Auth, Posts, getPost }) => {
         history.push(`/hired/${Posts.post.userId}`)
     }
 
+    const followHandler = () => {
+        follow(Posts.post.userId)
+    }
+
     if (!Posts.post) {
         return (
             <div></div>
@@ -69,7 +95,11 @@ export const DetailPost = ({ Auth, Posts, getPost }) => {
                                 </> :
                                 <>
                                     <button onClick={pushHire} className="text-white button pointer">Hire</button>
-                                    <button className="text-black button pointer" >Follow</button>
+                                    {
+                                        !state.followed ?
+                                            <button className="text-black button pointer" onClick={followHandler} >Follow</button> :
+                                            <button className="text-black button pointer" onClick={followHandler} >Unfollow</button>
+                                    }
                                 </>}
 
                         </div>
@@ -105,7 +135,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    getPost
+    getPost,
+    follow
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPost)

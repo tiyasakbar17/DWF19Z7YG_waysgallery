@@ -39,7 +39,6 @@ export const loadData = () => async dispatch => {
         dispatch({
             type: "AUTH_ERROR",
         });
-        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const userLogin = (data) => async dispatch => {
@@ -100,6 +99,17 @@ export const getUser = (data) => async dispatch => {
         dispatch(closeLoading())
     } catch (error) {
         dispatch(closeLoading())
+        dispatch(showPopUp(error.response.data.message))
+    }
+}
+export const follow = (data) => async dispatch => {
+    try {
+        dispatch(showLoading())
+        const result = await Axios.post(`${baseUrl}/follow/${data}`)
+        dispatch(closeLoading())
+        dispatch(loadData())
+        dispatch(showPopUp(result.data.message))
+    } catch (error) {
         dispatch(showPopUp(error.response.data.message))
     }
 }

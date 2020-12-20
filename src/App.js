@@ -4,19 +4,19 @@ import { Provider } from "react-redux";
 import Store from "./redux/store";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import UserRouter from "./components/routerLogin/UserRouter";
-import Landing from "./pages/Landing";
 import SetAuthToken from "./redux/actions/setAuthToken";
 import { loadData } from "./redux/actions/Auth";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import DetailPost from "./pages/DetailPost";
-import EditProfile from "./pages/EditProfile";
-import AddPost from "./pages/AddPost";
-import Hired from "./pages/Hired";
-import Order from "./pages/Order";
-import Profile from "./pages/Profile";
-import AddProject from "./pages/AddProject";
-import Project from "./pages/Project";
+import Landing from "./pages/Landing/Landing";
+import Home from "./pages/Home/Home";
+import DetailPost from "./pages/Posts/DetailPost";
+import AddPost from "./pages/Posts/AddPost";
+import Hired from "./pages/Hired/Hired";
+import AddProject from "./pages/Hired/Projects/AddProject";
+import Project from "./pages/Hired/Projects/Project";
+import EditProfile from "./pages/User/EditProfile";
+import Profile from "./pages/User/Profile";
+import Order from "./pages/Order/Order";
 
 function App() {
   if (localStorage.getItem("token")) {

@@ -1,13 +1,12 @@
-import React, { Component, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { addPost } from '../redux/actions/Posts'
+import { addPost } from '../../redux/actions/Posts'
 
 export const AddPost = ({ addPost }) => {
 
     const history = useHistory()
-
 
     const onDrop = useCallback(async acceptedFiles => {
         // Do something with the files

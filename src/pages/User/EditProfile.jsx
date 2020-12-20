@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { addArts, editProfile } from '../redux/actions/Auth'
+import { addArts, editProfile } from '../../redux/actions/Auth'
 
 export const EditProfile = ({ Auth, editProfile, addArts }) => {
 

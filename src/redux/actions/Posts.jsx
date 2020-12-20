@@ -26,7 +26,7 @@ export const getPosts = () => async dispatch => {
         dispatch(closeLoading())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.message))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const getPost = (id) => async dispatch => {

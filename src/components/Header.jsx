@@ -7,7 +7,7 @@ import Loading from './PopUps/Loading';
 import PopUps from './PopUps/PopUps'
 import ProgressBar from './PopUps/ProgressBar';
 
-function Header({ Auth, PopUpState, logout }) {
+function Header({ Posts, Auth, PopUpState }) {
 
     const history = useHistory();
 
@@ -49,7 +49,8 @@ function Header({ Auth, PopUpState, logout }) {
 const mapStateToProps = state => {
     return {
         Auth: state.Auth,
-        PopUpState: state.PopUp
+        PopUpState: state.PopUp,
+        Posts: state.Posts
     }
 }
 

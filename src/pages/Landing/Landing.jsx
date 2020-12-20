@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import Login from '../components/Landing/Login'
-import Register from '../components/Landing/Register'
+import Login from '../../components/Landing/Login'
+import Register from '../../components/Landing/Register'
 
 function Landing({ Auth }) {
 

@@ -1,9 +1,24 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import Card from '../components/Home/Card'
-import { getPosts } from '../redux/actions/Posts'
+import Card from '../../components/Home/Card'
+import { getPosts } from '../../redux/actions/Posts'
 
 function Home({ Posts, getPosts }) {
+    const compare = (key) => {
+        return (a, b) => {
+            if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                return 0;
+            }
+            let comparison = 0;
+            if (a[key] < b[key]) {
+                comparison = 1;
+            }
+            if (a[key] > b[key]) {
+                comparison = -1;
+            }
+            return comparison;
+        };
+    };
 
     const innitialState = {
         options: 'true',
@@ -27,7 +42,7 @@ function Home({ Posts, getPosts }) {
     }, [])
 
     let postsToday = []
-    const copyPost = Posts.posts ? Posts.posts.map(post => (Date.now() - new Date(post.createdAt).getTime()) < (24 * 60 * 60 * 1000) ? postsToday.push(post) : null) : null;
+    const copyPost = Posts.posts ? Posts.posts.sort(compare("createdAt")).map(post => (Date.now() - new Date(post.createdAt).getTime()) < (24 * 60 * 60 * 1000) ? postsToday.push(post) : null) : null;
     const allPosts = Posts.posts
 
     const ShowToday = () => {

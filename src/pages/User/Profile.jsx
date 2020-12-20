@@ -1,24 +1,53 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
-import Card from '../components/Home/Card'
-import { getUser } from '../redux/actions/Auth'
+import Card from '../../components/Home/Card'
+import { follow, getUser } from '../../redux/actions/Auth'
 
-export const Profile = ({ Auth, getUser }) => {
+export const Profile = ({ Auth, getUser, follow }) => {
 
     const history = useHistory()
 
     const { id } = useParams()
 
+    const following = async () => {
+        if (!Auth.user) {
+            return null
+        }
+        const check = await Auth.userData.following.find(follow => follow.followTo === Number(id))
+        console.log("CEK STATE", check);
+        if (!check) {
+            return setState(prevState => ({
+                ...prevState,
+                followed: 0
+            }))
+        }
+        setState(prevState => ({
+            ...prevState,
+            followed: 1
+        }))
+    }
+
+    const innitialValue = {
+        followed: 0,
+    }
+    const [state, setState] = React.useState(innitialValue)
+
+
     React.useEffect(() => {
         getUser(id);
     }, [id])
-
+    React.useEffect(() => {
+        following()
+    }, [Auth.userData.following, Auth.user])
     const pushHired = () => {
         history.push(`/hired/${Auth.user.id}`)
     }
     const pushEdit = () => {
         history.push("/editProfile")
+    }
+    const followHandler = () => {
+        follow(id)
     }
 
     if (!Auth.user) {
@@ -50,7 +79,11 @@ export const Profile = ({ Auth, getUser }) => {
                             <div className="ProfileButton flex">
                                 {Auth.user.id !== Auth.userData.id ?
                                     <>
-                                        <button className="text-black button pointer">Follow</button>
+                                        {
+                                            !state.followed ?
+                                                <button className="text-black button pointer" onClick={followHandler} >Follow</button> :
+                                                <button className="text-black button pointer" onClick={followHandler} >Unfollow</button>
+                                        }
                                         <button onClick={pushHired} className="text-white button pointer" >Hire</button>
                                     </> :
                                     <button onClick={pushEdit} className="text-white button editProfile pointer" >Edit Profile</button>
@@ -101,7 +134,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    getUser
+    getUser,
+    follow
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
