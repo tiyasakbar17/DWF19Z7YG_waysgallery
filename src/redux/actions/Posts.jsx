@@ -12,8 +12,13 @@ const configForm = (dispatch) => ({
         dispatch(showProgress(percentage));
     },
 });
+const configJson = {
+    headers: {
+        "Content-type": "application/json",
+    },
+};
 
-const baseUrl = 'http://localhost:5000/api/v1'
+const baseUrl = 'https://finaltask-tiyas.herokuapp.com/api/v1'
 
 export const getPosts = () => async dispatch => {
     try {
@@ -56,5 +61,28 @@ export const addPost = (data) => async dispatch => {
         dispatch(showPopUp(result.data.message))
     } catch (error) {
         dispatch(showPopUp(error.response.data.message))
+    }
+}
+export const deletePost = (data) => async dispatch => {
+    try {
+        dispatch(showLoading());
+        const result = await Axios.delete(`${baseUrl}/post/${data}`)
+        dispatch(closeLoading())
+        dispatch(showPopUp(result.data.message))
+    } catch (error) {
+        dispatch(closeLoading())
+        dispatch(showPopUp(error.response.message))
+    }
+}
+export const editPost = (data) => async dispatch => {
+    try {
+        dispatch(showLoading());
+        const result = await Axios.patch(`${baseUrl}/post/${data.postId}`, { description: data.description, title: data.title }, configJson)
+        dispatch(getPost(data.postId))
+        dispatch(closeLoading())
+        dispatch(showPopUp(result.data.message))
+    } catch (error) {
+        dispatch(closeLoading())
+        dispatch(showPopUp(error.response.message))
     }
 }

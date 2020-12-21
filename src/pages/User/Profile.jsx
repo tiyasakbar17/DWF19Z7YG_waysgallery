@@ -6,6 +6,22 @@ import { follow, getUser } from '../../redux/actions/Auth'
 
 export const Profile = ({ Auth, getUser, follow }) => {
 
+    const compare = (key) => {
+        return (a, b) => {
+            if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                return 0;
+            }
+            let comparison = 0;
+            if (a[key] < b[key]) {
+                comparison = 1;
+            }
+            if (a[key] > b[key]) {
+                comparison = -1;
+            }
+            return comparison;
+        };
+    };
+
     const history = useHistory()
 
     const { id } = useParams()
@@ -14,8 +30,9 @@ export const Profile = ({ Auth, getUser, follow }) => {
         if (!Auth.user) {
             return null
         }
+        await Auth.user.posts.sort(compare("createdAt"));
         const check = await Auth.userData.following.find(follow => follow.followTo === Number(id))
-        console.log("CEK STATE", check);
+
         if (!check) {
             return setState(prevState => ({
                 ...prevState,
@@ -62,7 +79,7 @@ export const Profile = ({ Auth, getUser, follow }) => {
                     <div className="upperProfileBody flex">
                         <div className="upperProfieLeft">
                             <div className="profilePict">
-                                <img src={Auth.user.avatar ? `http://localhost:5000/uploads/${Auth.user.avatar}` : "/logo512.png"} alt="avatar" className="image" />
+                                <img src={Auth.user.avatar ? Auth.user.avatar : "/logo512.png"} alt="avatar" className="image" />
                             </div>
                             <div className="userDetails">
                                 <span className="f-18" >
@@ -95,7 +112,7 @@ export const Profile = ({ Auth, getUser, follow }) => {
                                 {
                                     Auth.user.posts.length === 0 ?
                                         null :
-                                        <img src={`http://localhost:5000/uploads/${Auth.user.posts[0].photos[0].image}`} alt="Last Post" className="image" />
+                                        <img src={Auth.user.posts[0].photos[0].image} alt="Last Post" className="image" />
                                 }
                             </div>
                         </div>

@@ -10,7 +10,7 @@ const Card = ({ image, postId }) => {
     }
 
     return (
-        <img onClick={clickHandler} src={`http://localhost:5000/uploads/${image}`} alt="gambar" className="image" />
+        <img onClick={clickHandler} src={image} alt="gambar" className="image" />
     )
 }
 

@@ -18,7 +18,7 @@ const configForm = (dispatch) => ({
         dispatch(showProgress(percentage));
     },
 });
-const baseUrl = 'http://localhost:5000/api/v1'
+const baseUrl = 'https://finaltask-tiyas.herokuapp.com/api/v1'
 
 export const loadData = () => async dispatch => {
 
@@ -52,7 +52,7 @@ export const userLogin = (data) => async dispatch => {
         dispatch(loadData())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response.data.message))
+        dispatch(showPopUp(error.response))
     }
 }
 export const userRegister = (data) => async dispatch => {

@@ -95,7 +95,7 @@ export const EditProfile = ({ Auth, editProfile, addArts }) => {
                 <div className="editRightPart">
                     <form onSubmit={submitHandler}>
                         <div className="profileImage">
-                            <img src={state.preview ? state.preview : Auth.userData.avatar ? `http://localhost:5000/uploads/${Auth.userData.avatar}` : '/logo512.png'} alt="Profile Pictuce" className="image" />
+                            <img src={state.preview ? state.preview : Auth.userData.avatar ? `${Auth.userData.avatar}` : '/logo512.png'} alt="Profile Pictuce" className="image" />
                             <input type="file" className="input hidden" ref={textInput} name="avatar" onChange={fileHandler} />
                             <div onClick={focusTextInput} className="changePict pointer">
                                 <div className="flex justify-content-center" style={{ width: "100%" }}><i className="fas fa-camera fa-3x"></i></div>

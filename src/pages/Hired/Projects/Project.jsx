@@ -35,7 +35,7 @@ export const Project = ({ Hired }) => {
                 <div className="addPostLeft ">
                     <div className="leftContainer">
                         <div className="projectPreview border">
-                            <img src={`http://localhost:5000/uploads/${state.preview}`} alt="Main Picture" className="image" />
+                            <img src={state.preview} alt="Main Picture" className="image" />
                         </div>
                         <div className="filePreview">
                             {
@@ -43,7 +43,7 @@ export const Project = ({ Hired }) => {
                                     i = i + 1;
                                     return (
                                         <div className="previewItems pointer" onClick={() => changePreview(photo.id)} key={i}>
-                                            <img src={`http://localhost:5000/uploads/${photo.photo}`} alt="preview" className="image" />
+                                            <img src={photo.photo} alt="preview" className="image" />
                                         </div>
                                     )
                                 })

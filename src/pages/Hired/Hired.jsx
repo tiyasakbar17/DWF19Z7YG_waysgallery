@@ -60,18 +60,6 @@ export const Hired = ({ addHired }) => {
                 </form>
             </div>
         </div>
-        // <div style={{ margin: "121px 80px" }}>
-        //     <div className="" style={{ width: "500px", padding: "10px" }}>
-        // <form action="" onSubmit={submitHandler}>
-        //     <input type="text" className="input" name="title" onChange={changeHandler} value={state.title} placeholder="Title" />
-        //     <input type="text" className="input" name="description" onChange={changeHandler} value={state.description} placeholder="Description" />
-        //     <input type="date" className="input" name="startDate" onChange={changeHandler} value={state.startDate} />
-        //     <input type="date" className="input" name="endDate" onChange={changeHandler} value={state.endDate} />
-        //     <input type="text" className="input" name="price" onChange={changeHandler} value={state.price} placeholder="Price" />
-        //     <button type="submit">SUBMIT</button>
-        // </form>
-        //     </div>
-        // </div>
     )
 }
 

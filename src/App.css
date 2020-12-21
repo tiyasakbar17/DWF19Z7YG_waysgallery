@@ -54,7 +54,9 @@
   height: 30px;
 }
 .editPost {
-  width: 80px;
+  width: 120px;
+  font-size: 12px;
+  height: 25px;
 }
 
 /* //////// */
@@ -371,6 +373,10 @@ div.upperDetailPostRight button.text-black {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.description {
+  width: 100%;
+  height: 150px;
 }
 
 /* ///////////// */
