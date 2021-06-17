@@ -17,7 +17,7 @@ const configForm = (dispatch) => ({
         dispatch(showProgress(percentage));
     },
 });
-const baseUrl = 'https://finaltask-tiyas.herokuapp.com/api/v1'
+const baseUrl = 'https://tiyas-ways-gallery.herokuapp.com/api/v1'
 
 export const loadAllOrders = (data) => async dispatch => {
     try {
