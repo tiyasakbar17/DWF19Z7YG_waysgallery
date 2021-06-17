@@ -21,7 +21,7 @@ function Home({ Posts, getPosts }) {
     };
 
     const innitialState = {
-        options: 'true',
+        options: 'false',
         search: '',
         message: "today's posts"
     }
