@@ -23,7 +23,7 @@ function Home({ Posts, getPosts }) {
     const innitialState = {
         options: 'false',
         search: '',
-        message: "today's posts"
+        message: "all posts"
     }
 
     const [state, setState] = useState(innitialState)
@@ -86,8 +86,8 @@ function Home({ Posts, getPosts }) {
                 <div className="flex">
                     <div className="headerPartLeft">
                         <select onChange={changeHandler} name="options" className="postSelector">
-                            <option value={true}>Today</option>
                             <option value={false}>All Posts</option>
+                            <option value={true}>Today</option>
                         </select>
                     </div>
                     <div className="headerPartRight">
