@@ -52,7 +52,7 @@ export const userLogin = (data) => async dispatch => {
         dispatch(loadData())
     } catch (error) {
         dispatch(closeLoading())
-        dispatch(showPopUp(error.response))
+        dispatch(showPopUp(error.response.data.message))
     }
 }
 export const userRegister = (data) => async dispatch => {
